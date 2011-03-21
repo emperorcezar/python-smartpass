@@ -1,1 +1,4 @@
+build/*
+dist/*
+smartpass.egg-info/*
 *.pyc
