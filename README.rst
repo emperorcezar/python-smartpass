@@ -1,3 +1,7 @@
+================
+python-smartpass
+================
+
 This is a Python library to interact with Trapeze Smart Pass. 
 
 Example of use::

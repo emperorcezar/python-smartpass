@@ -1,15 +1,19 @@
 import urllib2
 import urllib
-from django.conf import settings
 
 class SmartPass:
-    def __init__(self, username, password):
+    def __init__(self, username, password, url):
+        """
+        Constructor, the username and password are for auth. Url is the base server url for the api.
+        """
+        
         self.username = username
         self.password = password
+        self.smartpass_url = url
 
         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
         # this creates a password manager
-        passman.add_password(None, settings.SMARTPASS_URL, self.username, self.password)
+        passman.add_password(None, self.smartpass_url, self.username, self.password)
         # because we have put None at the start it will always
         # use this username/password combination for  urls
         # for which `theurl` is a super-url
@@ -30,7 +34,7 @@ class SmartPass:
         Generic caller. Handles authentication and weither to use and/or post
         """
 
-        url = settings.SMARTPASS_URL + url
+        url = self.smartpass_url + url
 
         if post:
             post_data = urllib.urlencode(post)
@@ -70,7 +74,8 @@ class SmartPass:
         if other_values:
             get_data.update(other_values)
 
-        self.call(url, get = get_data)
+        response = self.call(url, get = get_data)
 
+        # TODO: Error checking on the response
 
         
