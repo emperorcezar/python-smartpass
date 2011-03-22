@@ -1,7 +1,7 @@
 import urllib2
 import urllib
 
-class SmartPass:
+class SmartPassClient:
     def __init__(self, username, password, url):
         """
         Constructor, the username and password are for auth. Url is the base server url for the api.
