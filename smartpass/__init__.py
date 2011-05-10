@@ -1,1 +1,1 @@
-from smartpass import SmartPassClient 
+from smartpass import SmartPassClient, SmartPassException
