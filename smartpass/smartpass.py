@@ -1,6 +1,12 @@
 import urllib2
 import urllib
 
+class SmartPassException(StandardError):
+    '''
+    SmartPassException. Used when the API returns an error
+    '''
+    pass
+
 class SmartPassClient:
     def __init__(self, username, password, url):
         """
@@ -76,6 +82,9 @@ class SmartPassClient:
 
         response = self.call(url, get = get_data)
 
-        # TODO: Error checking on the response
+        if 'ERROR' in response:
+            raise SmartPassException, response
+
+        return response
 
         
